@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::middleware('guest')->namespace('App\Http\Controllers')->group(function () {
+    Route::get('/login', function () {
+        return view('login');
+    })->name('login');
+
+    Route::post('/login', 'LoginController@authenticate')->name('login.post');
 });
